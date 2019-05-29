@@ -1,9 +1,11 @@
 'use strict'
 const bcrypt = require('bcryptjs')
+const faker = require('faker')
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Users', [{
+    // generate user seed data
+    queryInterface.bulkInsert('Users', [{
       email: 'root@example.com',
       password: bcrypt.hashSync('12345678', bcrypt.genSaltSync(10), null),
       isAdmin: true,
@@ -25,9 +27,25 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date()
     }], {})
+
+    // generate restaurant seed data
+    return queryInterface.bulkInsert('Restaurants',
+      Array.from({ length: 50 }).map(d =>
+        ({
+          name: faker.name.findName(),
+          tel: faker.phone.phoneNumber(),
+          address: faker.address.streetAddress(),
+          opening_hours: '08:00',
+          image: faker.image.imageUrl(),
+          description: faker.lorem.text(),
+          createdAt: new Date(),
+          updatedAt: new Date()
+        })
+      ), {})
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Users', null, {})
+    queryInterface.bulkDelete('Users', null, {})
+    return queryInterface.bulkDelete('Restaurants', null, {})
   }
 }
