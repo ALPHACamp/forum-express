@@ -5,10 +5,11 @@ module.exports = (sequelize, DataTypes) => {
     tel: DataTypes.STRING,
     address: DataTypes.STRING,
     opening_hours: DataTypes.STRING,
-    description: DataTypes.TEXT
+    description: DataTypes.TEXT,
+    image: DataTypes.STRING
   }, {})
   Restaurant.associate = function (models) {
     // associations can be defined here
   }
   return Restaurant
-};
+}
