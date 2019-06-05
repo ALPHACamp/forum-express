@@ -14,7 +14,10 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // 設定 view engine 使用 handlebars
-app.engine('handlebars', handlebars({ defaultLayout: 'main' }))
+app.engine('handlebars', handlebars({
+  defaultLayout: 'main',
+  helpers: require('./config/handlebars-helpers')
+}))
 app.set('view engine', 'handlebars')
 
 app.use(bodyParser.urlencoded({ extended: true }))
