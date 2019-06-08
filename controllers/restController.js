@@ -18,7 +18,8 @@ const restController = {
       Category.findAll().then(categories => {
         return res.render('restaurants', {
           restaurants: data,
-          categories: categories
+          categories: categories,
+          categoryId: categoryId
         })
       })
     })
