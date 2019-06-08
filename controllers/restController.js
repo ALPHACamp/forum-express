@@ -9,8 +9,11 @@ const restController = {
         ...r.dataValues,
         description: r.dataValues.description.substring(0, 50)
       }))
-      return res.render('restaurants', {
-        restaurants: data
+      Category.findAll().then(categories => {
+        return res.render('restaurants', {
+          restaurants: data,
+          categories: categories
+        })
       })
     })
   },
