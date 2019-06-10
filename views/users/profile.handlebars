@@ -9,6 +9,11 @@
         <p class="card-text">
           {{profile.email}}
         </p>
+        <p>
+          {{#ifCond profile.id user.id }}
+            <a href="/users/{{profile.id}}/edit"><button type="submit" class="btn btn-primary">edit</button></a>
+          {{/ifCond}}
+        </p>
       </div>
     </div>
   </div>
