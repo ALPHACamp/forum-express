@@ -3,6 +3,7 @@ const IMGUR_CLIENT_ID = process.env.IMGUR_CLIENT_ID
 const fs = require('fs')
 const db = require('../models')
 const Restaurant = db.Restaurant
+const User = db.User
 
 const adminController = {
   getRestaurants: (req, res) => {
@@ -108,6 +109,25 @@ const adminController = {
         restaurant.destroy()
           .then((restaurant) => {
             res.redirect('/admin/restaurants')
+          })
+      })
+  },
+  getUsers: (req, res) => {
+    return User.findAll().then(users => {
+      return res.render('admin/users', {
+        users: users
+      })
+    })
+  },
+  putUsers: (req, res) => {
+    return User.findByPk(req.params.id)
+      .then((user) => {
+        user.update({
+          isAdmin: req.body.isAdmin === 'true'
+        })
+          .then((restaurant) => {
+            req.flash('success_messages', 'user was successfully to update')
+            res.redirect('/admin/users')
           })
       })
   }
