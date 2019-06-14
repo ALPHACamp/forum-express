@@ -51,9 +51,13 @@ const restController = {
         { model: Comment, include: [User] }
       ]
     }).then(restaurant => {
-      return res.render('restaurant', {
-        restaurant: restaurant
-      })
+      restaurant.viewCounts += 1
+      restaurant.save()
+        .then(restaurant => {
+          return res.render('restaurant', {
+            restaurant: restaurant
+          })
+        })
     })
   },
   getFeeds: (req, res) => {
