@@ -1,0 +1,42 @@
+<div class="card mb-3">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      {{#if profile.image}}
+        <img src="{{profile.image}}" width="300px" height="300px" />
+      {{else}}
+        <img src="https://via.placeholder.com/300" width="300px" height="300px" />
+      {{/if}}
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{profile.name}}</h5>
+        <p class="card-text">
+          {{profile.email}}
+        </p>
+        <p>
+          {{#ifCond profile.id user.id }}
+            <a href="/users/{{profile.id}}/edit"><button type="submit" class="btn btn-primary">edit</button></a>
+          {{/ifCond}}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <strong>{{profile.Comments.length}}</strong> 已評論餐廳
+      </div>
+      <div class="card-body">
+        {{#each profile.Comments}}
+          <a href="/restaurants/{{this.Restaurant.id}}">
+            <img src={{this.Restaurant.image}} width="60" height="60" class="avatar" />
+          </a>
+        {{/each}}
+      </div>
+    </div>
+    <br />
+  </div>
+</div>
