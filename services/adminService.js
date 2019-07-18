@@ -4,6 +4,7 @@ const IMGUR_CLIENT_ID = process.env.IMGUR_CLIENT_ID
 const db = require('../models')
 const Restaurant = db.Restaurant
 const Category = db.Category
+const User = db.User
 
 const adminService = {
   getRestaurants: (req, res, callback) => {
@@ -13,7 +14,7 @@ const adminService = {
   },
   postRestaurant: (req, res, callback) => {
     if (!req.body.name) {
-      return callback({ status: 'error', message: "name didn't exist"})
+      return callback({ status: 'error', message: "name didn't exist" })
     }
     const { file } = req // equal to const file = req.file
     if (file) {
@@ -97,6 +98,25 @@ const adminService = {
         restaurant.destroy()
           .then((restaurant) => {
             callback({ status: 'success', message: '' })
+          })
+      })
+  },
+  getUsers: (req, res, callback) => {
+    return User.findAll().then(users => {
+      callback({ users: users })
+    })
+  },
+  putUsers: (req, res, callback) => {
+    return User.findByPk(req.params.id)
+      .then((user) => {
+        user.update({
+          isAdmin: req.body.isAdmin === 'true'
+        })
+          .then((restaurant) => {
+            callback({
+              status: 'success',
+              message: 'user was successfully to update'
+            })
           })
       })
   }
