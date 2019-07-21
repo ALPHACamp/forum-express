@@ -11,13 +11,12 @@ let categoryService = {
           })
       } else {
         callback({ categories: categories })
-
       }
     })
   },
   postCategory: (req, res, callback) => {
     if (!req.body.name) {
-      callback({ status: 'error', message: 'name didn\'t exist'})
+      callback({ status: 'error', message: 'name didn\'t exist' })
     } else {
       return Category.create({
         name: req.body.name
@@ -45,7 +44,7 @@ let categoryService = {
       .then((category) => {
         category.destroy()
           .then((category) => {
-            callback({ status: 'success', message: ''})
+            callback({ status: 'success', message: '' })
           })
       })
   }
