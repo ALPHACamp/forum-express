@@ -17,7 +17,7 @@ const restService = {
     }
     if (req.query.categoryId) {
       categoryId = Number(req.query.categoryId)
-      whereQuery['categoryId'] = categoryId
+      whereQuery['CategoryId'] = categoryId
     }
     Restaurant.findAndCountAll({ include: Category, where: whereQuery, offset: offset, limit: pageLimit }).then(result => {
       // data for pagination
