@@ -14,7 +14,7 @@ if (process.env.NODE_ENV !== 'production') {
 const passport = require('./config/passport')
 
 // cors 的預設為全開放
-app.use(cors());
+app.use(cors())
 
 // 設定 view engine 使用 handlebars
 app.engine('handlebars', handlebars({
