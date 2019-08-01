@@ -69,6 +69,7 @@ TDD 則是「先寫測試再開發程式」。
 
 [ ] Array - #indexOf() - should return -1 when the value is not present
 [ ] 比較斷言庫的不同
+[ ] 了解每一個測試案例的生命週期
 
 ### 示範一個 CRUD 的測試該如何進行
 
