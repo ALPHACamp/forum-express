@@ -123,3 +123,22 @@ describe('# signup', function() {
         });
     });
 })
+
+describe('# signup api', function() {
+    it("should create user", (done) => {
+        request(app)
+          .post('/api/signup')
+          .send('name=name&email=email2&password=password&passwordCheck=password')
+          .expect(200)
+          .end(function(err, res) {
+            db.User.findOne({
+              where: {
+                email: 'email2'
+              }
+            }).then((user) => {  
+              expect(user.email).to.be.equal('email2')
+              done()
+            })
+        });
+    });
+})
