@@ -35,3 +35,40 @@ npm run dev
 * 只有網站管理者可以登入網站後台
 * 網站管理者可以在後台管理餐廳的基本資料
 * 網站管理者可以在後台管理餐廳分類
+
+## 關於測試
+
+1. 介紹測試概念與準備測試環境（Mocha）
+2. 撰寫第一個測試
+3. 示範一個 CRUD 的測試該如何進行
+4. 依照程式結構定義測試（API、Controller、Service、Model...）
+
+### 介紹測試概念與準備測試環境（Mocha）
+
+1. 測試的類型與目的
+
+* 單元測試 (unit testing)
+* 整合測試 (integration testing)
+* 驗收測試 (acceptance Test / end-to-end testing)
+
+2. BDD & TDD
+
+* TDD 是一種開發的流程。許多專案在開發時，通常會邊寫程式邊寫測試，或是先寫程式後寫測試，或是更常見 — 你知道的，寫了程式不寫測試。
+TDD 則是「先寫測試再開發程式」。
+
+* BDD 則是比起 TDD 更進一步，除了在實作前先寫測試外，而在測試前還要先寫規格，但是這份規格並不是單純的敘述軟體的功能，而是這份規格，是一份「可以執行的規格」。
+
+3. 工具與生態系
+
+* Mocha (Node.js 裡的名人 TJ Holowaychuk)
+* Supertest
+* Stub & Mock
+* webdriverio & nightwatch （F2E Testing）
+
+### 撰寫第一個測試
+
+[ ] Array - #indexOf() - should return -1 when the value is not present
+
+### 示範一個 CRUD 的測試該如何進行
+
+### 依照程式結構定義測試（API、Controller、Service、Model...）
