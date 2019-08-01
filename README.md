@@ -74,5 +74,6 @@ TDD 則是「先寫測試再開發程式」。
 ### 示範一個 CRUD 的測試該如何進行
 
 [ ] User 的 CRUD action => Model
+[ ] User 的註冊 => Controller
 
 ### 依照程式結構定義測試（API、Controller、Service、Model...）
