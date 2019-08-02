@@ -11,7 +11,17 @@ const adminController = require('../controllers/api/adminController.js')
 const categoryController = require('../controllers/api/categoryController.js')
 const commentController = require('../controllers/api/commentController.js')
 
-const authenticated = passport.authenticate('jwt', { session: false })
+function authenticate(req, res, next){
+  passport.authenticate('jwt', { session: false}, (err, user, info) => {
+    if (!user) {
+        return res.status(401).json({ status: 'error', message: "No auth token" });
+    }
+    req.user = user;
+    return next();
+  })(req, res, next);
+};
+
+const authenticated = authenticate
 
 const authenticatedAdmin = (req, res, next) => {
   if (req.user) {

@@ -67,20 +67,21 @@ TDD 則是「先寫測試再開發程式」。
 
 ### 撰寫第一個測試
 
-[ ] Array - #indexOf() - should return -1 when the value is not present
-[ ] 比較斷言庫的不同
-[ ] 了解每一個測試案例的生命週期
+- [ ] Array - #indexOf() - should return -1 when the value is not present
+- [ ] 比較斷言庫的不同
+- [ ] 了解每一個測試案例的生命週期
 
 ### 示範一個 CRUD 的測試該如何進行
 
-[ ] User 的 CRUD action => Model
-[ ] User 的註冊 => Controller
-[ ] User 的註冊 => API
+- [ ] User 的 CRUD action => Model
+- [ ] User 的註冊 => Controller
+- [ ] User 的註冊 => API
 
 ### 依照程式結構定義測試（API、Controller、Model...）
 
-[ ] file structure for testing
-[ ] model
-[ ] controller / api
-[ ] # User controller api - /api/signup
-[ ] # User controller api - /api/signin
+- [ ] file structure for testing
+- [ ] model
+- [ ] controller / api
+- [ ] # User controller api - /api/signup
+- [ ] # User controller api - /api/signin
+- [ ] # User controller api - /api/users/top - 已登入 & 未登入

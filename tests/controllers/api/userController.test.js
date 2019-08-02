@@ -4,7 +4,9 @@ const chai = require('chai')
 const request = require('supertest')
 const should = chai.should()
 const { expect } = require('chai')
+const sinon = require('sinon')
 
+const passport = require('../../../config/passport')
 const app = require('../../../app')
 const db = require('../../../models')
 
@@ -74,7 +76,6 @@ describe('# User controller api', function() {
               done()
           });
       });
-
   })
 
   describe('/api/signin', () => {
@@ -172,5 +173,62 @@ describe('# User controller api', function() {
       });
   })
 
-})
+  describe('/api/users/top - 未登入', () => {
 
+      before(async function() {
+        // 在所有測試開始前會執行的程式碼區塊
+        await db.User.destroy({where: {},truncate: true})
+        await db.User.create({name: 'root'})
+        await db.User.create({name: 'user1'})
+        await db.User.create({name: 'user2'})
+      });
+
+      after(async function() {
+        // 在所有測試結束後會執行的程式碼區塊
+        await db.User.destroy({where: {},truncate: true})
+      });
+
+      it("(X) 未登入，無法取得 Top Users", (done) => {
+          request(app)
+            .get('/api/users/top')
+            .end(function(err, res) {
+              expect(res.body.status).to.be.equal('error')
+              expect(res.body.message).to.be.equal('No auth token')
+              done()
+          });
+      });
+  })
+
+  describe('/api/users/top - 已登入', () => {
+
+      before(async function() {
+        // 在所有測試開始前會執行的程式碼區塊
+        await db.User.destroy({where: {},truncate: true})
+        const rootUser = await db.User.create({name: 'root'})
+        await db.User.create({name: 'user1'})
+        await db.User.create({name: 'user2'})
+
+        this.authenticate =  sinon.stub(passport,"authenticate").callsFake((strategy, options, callback) => {            
+          callback(null, {...rootUser}, null);
+          return (req,res,next)=>{};
+        });
+
+      });
+
+      after(async function() {
+        // 在所有測試結束後會執行的程式碼區塊
+        await db.User.destroy({where: {},truncate: true})
+        this.authenticate.restore();
+      });
+
+      it("(O) 登入狀態，取得 Top Users", (done) => {
+          request(app)
+            .get('/api/users/top')
+            .end(function(err, res) {
+              expect(res.body.users.length).to.be.equal(3)
+              done()
+          });
+      });
+  })
+
+})
