@@ -43,7 +43,11 @@ const adminService = {
         CategoryId: req.body.categoryId
       })
         .then((restaurant) => {
-          callback({ status: 'success', message: 'restaurant was successfully created' })
+          callback({ 
+            status: 'success', 
+            message: 'restaurant was successfully created', 
+            restaurant: restaurant
+          })
         })
     }
   },
@@ -80,7 +84,7 @@ const adminService = {
       return Restaurant.findByPk(req.params.id)
         .then((restaurant) => {
           restaurant.update({
-            name: req.body.name,
+            name: req.body.name,√√
             tel: req.body.tel,
             address: req.body.address,
             opening_hours: req.body.opening_hours,
