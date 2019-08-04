@@ -4,6 +4,7 @@ const IMGUR_CLIENT_ID = process.env.IMGUR_CLIENT_ID
 const db = require('../models')
 const Restaurant = db.Restaurant
 const Category = db.Category
+const Comment = db.Comment
 const User = db.User
 
 const adminService = {
@@ -93,8 +94,17 @@ const adminService = {
     }
   },
   deleteRestaurant: (req, res, callback) => {
-    return Restaurant.findByPk(req.params.id)
+    return Restaurant.findByPk(req.params.id, {
+      include: [
+        { model: Comment, include: [User] }
+      ]
+    })
       .then((restaurant) => {
+        console.log('restaurant.Comments', restaurant.Comments)
+        restaurant.Comments.map(comment => {
+          console.log('comment.id', comment.id)
+          comment.destroy()
+        })
         restaurant.destroy()
           .then((restaurant) => {
             callback({ status: 'success', message: '' })
