@@ -16,9 +16,10 @@ let commentService = {
   deleteComment: (req, res, callback) => {
     return Comment.findByPk(req.params.id)
       .then((comment) => {
+        const restaurantId = comment.RestaurantId
         comment.destroy()
           .then((comment) => {
-            return callback({ status: 'success', message: '', RestaurantId: comment.RestaurantId })
+            return callback({ status: 'success', message: '', RestaurantId: restaurantId })
           })
       })
   }
