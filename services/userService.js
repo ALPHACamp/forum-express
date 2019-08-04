@@ -21,10 +21,10 @@ const userService = {
       ]
     }).then(user => {
       user.CommentsRestaurants = []
-      user.Comments.map((d) => {
-        if (!user.CommentsRestaurants.map(d => d.id).includes(d.RestaurantId)) {
-          user.CommentsRestaurants.push(d.Restaurant)
-          return d
+      user.Comments.map((comment) => {
+        if (!user.CommentsRestaurants.map(d => d.id).includes(comment.RestaurantId)) {
+          user.CommentsRestaurants.push(comment.Restaurant)
+          return comment
         }
       })
       const isFollowed = req.user.Followings.map(d => d.id).includes(user.id)
