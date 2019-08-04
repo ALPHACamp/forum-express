@@ -43,7 +43,11 @@ const adminService = {
         CategoryId: req.body.categoryId
       })
         .then((restaurant) => {
-          callback({ status: 'success', message: 'restaurant was successfully created' })
+          callback({
+            status: 'success',
+            message: 'restaurant was successfully created',
+            restaurant: restaurant
+          })
         })
     }
   },
