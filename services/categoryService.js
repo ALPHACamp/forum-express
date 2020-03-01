@@ -34,7 +34,11 @@ let categoryService = {
         .then((category) => {
           category.update(req.body)
             .then((category) => {
-              callback({ status: 'success', message: 'category was successfully updated' })
+              callback({
+                status: 'success',
+                message: 'category was successfully updated',
+                categoryId: category.id
+              })
             })
         })
     }

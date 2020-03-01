@@ -10,7 +10,12 @@ let commentService = {
     })
       .then((comment) => {
         console.log('comment', comment)
-        return callback({ status: 'success', message: '', RestaurantId: comment.RestaurantId })
+        return callback({
+          status: 'success',
+          message: 'created new comment successfully',
+          RestaurantId: comment.RestaurantId,
+          commentId: comment.id
+        })
       })
   },
   deleteComment: (req, res, callback) => {
@@ -19,7 +24,7 @@ let commentService = {
         const restaurantId = comment.RestaurantId
         comment.destroy()
           .then((comment) => {
-            return callback({ status: 'success', message: '', RestaurantId: restaurantId })
+            return callback({ status: 'success', message: 'comment is removed ', RestaurantId: restaurantId })
           })
       })
   }
