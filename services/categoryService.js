@@ -22,7 +22,11 @@ let categoryService = {
         name: req.body.name
       })
         .then((category) => {
-          callback({ status: 'success', message: 'category was successfully created' })
+          callback({
+            status: 'success',
+            message: 'category was successfully created',
+            categoryId: category.id
+          })
         })
     }
   },
