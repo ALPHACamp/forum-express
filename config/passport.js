@@ -36,6 +36,7 @@ passport.deserializeUser((id, cb) => {
       { model: User, as: 'Followings' }
     ]
   }).then(user => {
+    user = user.toJSON()
     return cb(null, user)
   })
 })
@@ -60,6 +61,7 @@ let strategy = new JwtStrategy(jwtOptions, function (jwt_payload, next) {
     ]
   }).then(user => {
     if (!user) return next(null, false)
+    user = user.toJSON()
     return next(null, user)
   })
 })

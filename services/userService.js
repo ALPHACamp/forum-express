@@ -28,7 +28,7 @@ const userService = {
         }
       })
       const isFollowed = req.user.Followings.map(d => d.id).includes(user.id)
-      callback({ profile: user, isFollowed: isFollowed })
+      callback({ profile: user.toJSON(), isFollowed: isFollowed })
     })
   },
   putUser: (req, res, callback) => {
@@ -108,6 +108,8 @@ const userService = {
   },
   getTopUser: (req, res, callback) => {
     return User.findAll({
+      raw: true,
+      nest: true,
       include: [
         { model: User, as: 'Followers' }
       ]

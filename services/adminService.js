@@ -8,7 +8,11 @@ const User = db.User
 
 const adminService = {
   getRestaurants: (req, res, callback) => {
-    return Restaurant.findAll({ include: [Category] }).then(restaurants => {
+    return Restaurant.findAll({ 
+      raw: true,
+      nest: true,
+      include: [Category]
+    }).then(restaurants => {
       callback({ restaurants: restaurants })
     })
   },
@@ -48,7 +52,7 @@ const adminService = {
   },
   getRestaurant: (req, res, callback) => {
     return Restaurant.findByPk(req.params.id, { include: [Category] }).then(restaurant => {
-      callback({ restaurant: restaurant })
+      callback({ restaurant: restaurant.toJSON() })
     })
   },
   putRestaurant: (req, res, callback) => {
@@ -102,7 +106,10 @@ const adminService = {
       })
   },
   getUsers: (req, res, callback) => {
-    return User.findAll().then(users => {
+    return User.findAll({
+      raw: true,
+      nest: true,
+    }).then(users => {
       callback({ users: users })
     })
   },

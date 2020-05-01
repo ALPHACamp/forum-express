@@ -34,7 +34,10 @@ const restService = {
         isFavorited: req.user.FavoritedRestaurants.map(d => d.id).includes(r.id),
         isLiked: req.user.LikedRestaurants.map(d => d.id).includes(r.id)
       }))
-      Category.findAll().then(categories => {
+      Category.findAll({
+        raw: true,
+        nest: true,
+      }).then(categories => {
         return callback({
           restaurants: data,
           categories: categories,
@@ -62,7 +65,7 @@ const restService = {
           const isFavorited = restaurant.FavoritedUsers.map(d => d.id).includes(req.user.id)
           const isLiked = restaurant.LikedUsers.map(d => d.id).includes(req.user.id)
           callback({
-            restaurant: restaurant,
+            restaurant: restaurant.toJSON(),
             isFavorited: isFavorited,
             isLiked: isLiked
           })
@@ -72,11 +75,15 @@ const restService = {
   getFeeds: (req, res, callback) => {
     return Restaurant.findAll({
       limit: 10,
+      raw: true,
+      nest: true,
       order: [['createdAt', 'DESC']],
       include: [Category]
     }).then(restaurants => {
       Comment.findAll({
         limit: 10,
+        raw: true,
+        nest: true,
         order: [['createdAt', 'DESC']],
         include: [User, Restaurant]
       }).then(comments => {
@@ -94,11 +101,13 @@ const restService = {
         { model: Comment, include: [User] }
       ]
     }).then(restaurant => {
-      return callback({ restaurant: restaurant })
+      return callback({ restaurant: restaurant.toJSON() })
     })
   },
   getTopRestaurants: (req, res, callback) => {
     return Restaurant.findAll({
+      raw: true,
+      nest: true,
       include: [
         { model: User, as: 'FavoritedUsers' }
       ]

@@ -1,4 +1,6 @@
 const adminService = require('../services/adminService.js')
+const db = require('../models')
+const Category = db.Category
 
 const adminController = {
   getRestaurants: (req, res) => {
@@ -7,7 +9,10 @@ const adminController = {
     })
   },
   createRestaurant: (req, res) => {
-    Category.findAll().then(categories => {
+    Category.findAll({
+      raw: true,
+      nest: true,
+    }).then(categories => {
       return res.render('admin/create', {
         categories: categories
       })
@@ -29,9 +34,12 @@ const adminController = {
     })
   },
   editRestaurant: (req, res) => {
-    Category.findAll().then(categories => {
+    Category.findAll({
+      raw: true,
+      nest: true,
+    }).then(categories => {
       return Restaurant.findByPk(req.params.id).then(restaurant => {
-        return res.render('admin/create', { categories: categories, restaurant: restaurant
+        return res.render('admin/create', { categories: categories, restaurant: restaurant.toJSON()
         })
       })
     })

@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt-nodejs')
 const db = require('../models')
 const User = db.User
 
@@ -54,7 +55,7 @@ const userController = {
   },
   editUser: (req, res) => {
     return User.findByPk(req.params.id).then(user => {
-      return res.render('users/edit', { user: user })
+      return res.render('users/edit', { user: user.toJSON() })
     })
   },
   putUser: (req, res) => {
