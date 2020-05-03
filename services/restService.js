@@ -73,26 +73,48 @@ const restService = {
     })
   },
   getFeeds: (req, res, callback) => {
-    return Restaurant.findAll({
-      limit: 10,
-      raw: true,
-      nest: true,
-      order: [['createdAt', 'DESC']],
-      include: [Category]
-    }).then(restaurants => {
+    return Promise.all([
+      Restaurant.findAll({
+        limit: 10,
+        raw: true,
+        nest: true,
+        order: [['createdAt', 'DESC']],
+        include: [Category],
+      }),
       Comment.findAll({
         limit: 10,
         raw: true,
         nest: true,
         order: [['createdAt', 'DESC']],
-        include: [User, Restaurant]
-      }).then(comments => {
-        callback({
-          restaurants: restaurants,
-          comments: comments
-        })
+        include: [User, Restaurant],
+      }),
+    ]).then(([restaurants, comments]) => {
+      callback({
+        restaurants: restaurants,
+        comments: comments
       })
-    })
+    });
+
+    // return Restaurant.findAll({
+    //   limit: 10,
+    //   raw: true,
+    //   nest: true,
+    //   order: [['createdAt', 'DESC']],
+    //   include: [Category]
+    // }).then(restaurants => {
+    //   Comment.findAll({
+    //     limit: 10,
+    //     raw: true,
+    //     nest: true,
+    //     order: [['createdAt', 'DESC']],
+    //     include: [User, Restaurant]
+    //   }).then(comments => {
+    //     callback({
+    //       restaurants: restaurants,
+    //       comments: comments
+    //     })
+    //   })
+    // })
   },
   getDashboard: (req, res, callback) => {
     return Restaurant.findByPk(req.params.id, {
