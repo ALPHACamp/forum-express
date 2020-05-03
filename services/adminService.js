@@ -20,6 +20,9 @@ const adminService = {
     if (!req.body.name) {
       return callback({ status: 'error', message: "name didn't exist" })
     }
+    if (!req.body.categoryId) {
+      return callback({ status: 'error', message: "category didn't exist" })
+    }
     const { file } = req // equal to const file = req.file
     if (file) {
       imgur.setClientID(IMGUR_CLIENT_ID)
@@ -58,6 +61,9 @@ const adminService = {
   putRestaurant: (req, res, callback) => {
     if (!req.body.name) {
       return callback({ status: 'error', message: "name didn't exist" })
+    }
+    if (!req.body.categoryId) {
+      return callback({ status: 'error', message: "category didn't exist" })
     }
 
     const { file } = req
