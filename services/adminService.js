@@ -124,7 +124,7 @@ const adminService = {
     return User.findByPk(req.params.id)
       .then((user) => {
         user.update({
-          isAdmin: req.body.isAdmin === 'true'
+          isAdmin: req.body.isAdmin === true
         })
           .then((restaurant) => {
             callback({
