@@ -1,29 +1,39 @@
 const restService = require('../../services/restService.js')
 
 const restController = {
-  getRestaurants: (req, res) => {
+  getRestaurants: (req, res, next) => {
     restService.getRestaurants(req, res, (data) => {
       return res.json(data)
+    }, (err) => {
+      next(err)
     })
   },
-  getRestaurant: (req, res) => {
+  getRestaurant: (req, res, next) => {
     restService.getRestaurant(req, res, (data) => {
       return res.json(data)
+    }, (err) => {
+      next(err)
     })
   },
-  getFeeds: (req, res) => {
+  getFeeds: (req, res, next) => {
     restService.getFeeds(req, res, (data) => {
       return res.json(data)
+    }, (err) => {
+      next(err)
     })
   },
-  getDashboard: (req, res) => {
+  getDashboard: (req, res, next) => {
     restService.getDashboard(req, res, (data) => {
       return res.json(data)
+    }, (err) => {
+      next(err)
     })
   },
-  getTopRestaurants: (req, res) => {
+  getTopRestaurants: (req, res, next) => {
     restService.getTopRestaurants(req, res, (data) => {
       return res.json(data)
+    }, (err) => {
+      next(err)
     })
   }
 }

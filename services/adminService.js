@@ -8,12 +8,16 @@ const Comment = db.Comment
 const User = db.User
 
 const adminService = {
-  getRestaurants: (req, res, callback) => {
-    return Restaurant.findAll({ include: [Category] }).then(restaurants => {
-      callback({ restaurants: restaurants })
-    })
+  getRestaurants: (req, res, callback, errorHandler) => {
+    return Restaurant.findAll({ include: [Category] })
+      .then(restaurants => {
+        callback({ restaurants: restaurants })
+      })
+      .catch(err => {
+        errorHandler(err)
+      })
   },
-  postRestaurant: (req, res, callback) => {
+  postRestaurant: (req, res, callback, errorHandler) => {
     if (!req.body.name) {
       return callback({ status: 'error', message: "name didn't exist" })
     }
@@ -31,6 +35,8 @@ const adminService = {
           CategoryId: req.body.categoryId
         }).then((restaurant) => {
           callback({ status: 'success', message: 'restaurant was successfully created' })
+        }).catch(err => {
+          errorHandler(err)
         })
       })
     } else {
@@ -49,14 +55,21 @@ const adminService = {
             restaurant: restaurant
           })
         })
+        .catch(err => {
+          errorHandler(err)
+        })
     }
   },
-  getRestaurant: (req, res, callback) => {
-    return Restaurant.findByPk(req.params.id, { include: [Category] }).then(restaurant => {
-      callback({ restaurant: restaurant })
-    })
+  getRestaurant: (req, res, callback, errorHandler) => {
+    return Restaurant.findByPk(req.params.id, { include: [Category] })
+      .then(restaurant => {
+        callback({ restaurant: restaurant })
+      })
+      .catch(err => {
+        errorHandler(err)
+      })
   },
-  putRestaurant: (req, res, callback) => {
+  putRestaurant: (req, res, callback, errorHandler) => {
     if (!req.body.name) {
       return callback({ status: 'error', message: "name didn't exist" })
     }
@@ -65,6 +78,10 @@ const adminService = {
     if (file) {
       imgur.setClientID(IMGUR_CLIENT_ID)
       imgur.upload(file.path, (err, img) => {
+        if (err) {
+          return errorHandler(err)
+        }
+
         return Restaurant.findByPk(req.params.id)
           .then((restaurant) => {
             restaurant.update({
@@ -77,6 +94,8 @@ const adminService = {
               CategoryId: req.body.categoryId
             }).then((restaurant) => {
               callback({ status: 'success', message: 'restaurant was successfully to update' })
+            }).catch(err => {
+              errorHandler(err)
             })
           })
       })
@@ -93,11 +112,13 @@ const adminService = {
             CategoryId: req.body.categoryId
           }).then((restaurant) => {
             callback({ status: 'success', message: 'restaurant was successfully to update' })
+          }).catch(err => {
+            errorHandler(err)
           })
         })
     }
   },
-  deleteRestaurant: (req, res, callback) => {
+  deleteRestaurant: (req, res, callback, errorHandler) => {
     return Restaurant.findByPk(req.params.id, {
       include: [
         { model: Comment, include: [User] }
@@ -113,14 +134,24 @@ const adminService = {
           .then((restaurant) => {
             callback({ status: 'success', message: '' })
           })
+          .catch(err => {
+            errorHandler(err)
+          })
+      })
+      .catch(err => {
+        errorHandler(err)
       })
   },
-  getUsers: (req, res, callback) => {
-    return User.findAll().then(users => {
-      callback({ users: users })
-    })
+  getUsers: (req, res, callback, errorHandler) => {
+    return User.findAll()
+      .then(users => {
+        callback({ users: users })
+      })
+      .catch(err => {
+        errorHandler(err)
+      })
   },
-  putUsers: (req, res, callback) => {
+  putUsers: (req, res, callback, errorHandler) => {
     return User.findByPk(req.params.id)
       .then((user) => {
         user.update({
@@ -132,6 +163,9 @@ const adminService = {
               message: 'user was successfully to update'
             })
           })
+      })
+      .catch(err => {
+        errorHandler(err)
       })
   }
 }

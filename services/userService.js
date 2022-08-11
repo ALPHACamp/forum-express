@@ -11,7 +11,7 @@ const imgur = require('imgur-node-api')
 const IMGUR_CLIENT_ID = process.env.IMGUR_CLIENT_ID
 
 const userService = {
-  getUser: (req, res, callback) => {
+  getUser: (req, res, callback, errorHandler) => {
     return User.findByPk(req.params.id, {
       include: [
         { model: Comment, include: Restaurant },
@@ -29,9 +29,11 @@ const userService = {
       })
       const isFollowed = req.user.Followings.map(d => d.id).includes(user.id)
       callback({ profile: user, isFollowed: isFollowed })
+    }).catch(err => {
+      errorHandler(err)
     })
   },
-  putUser: (req, res, callback) => {
+  putUser: (req, res, callback, errorHandler) => {
     if (Number(req.params.id) !== Number(req.user.id)) {
       return callback({ status: 'error', message: 'permission denied' })
     }
@@ -39,6 +41,9 @@ const userService = {
     if (file) {
       imgur.setClientID(IMGUR_CLIENT_ID)
       imgur.upload(file.path, (err, img) => {
+        if (err) {
+          return errorHandler(err)
+        }
         return User.findByPk(req.params.id)
           .then((user) => {
             user.update({
@@ -46,7 +51,12 @@ const userService = {
               image: img.data.link
             }).then((user) => {
               return callback({ status: 'success', message: 'updated successfully' })
+            }).catch(err => {
+              errorHandler(err)
             })
+          })
+          .catch(err => {
+            errorHandler(err)
           })
       })
     } else {
@@ -56,11 +66,16 @@ const userService = {
             name: req.body.name
           }).then((user) => {
             return callback({ status: 'success', message: 'updated successfully' })
+          }).catch(err => {
+            errorHandler(err)
           })
+        })
+        .catch(err => {
+          errorHandler(err)
         })
     }
   },
-  addFavorite: (req, res, callback) => {
+  addFavorite: (req, res, callback, errorHandler) => {
     return Favorite.create({
       UserId: req.user.id,
       RestaurantId: req.params.restaurantId
@@ -68,9 +83,12 @@ const userService = {
       .then((restaurant) => {
         return callback({ status: 'success', message: '' })
       })
+      .catch(err => {
+        errorHandler(err)
+      })
   },
 
-  removeFavorite: (req, res, callback) => {
+  removeFavorite: (req, res, callback, errorHandler) => {
     return Favorite.findOne({
       where: {
         UserId: req.user.id,
@@ -82,18 +100,26 @@ const userService = {
           .then((restaurant) => {
             return callback({ status: 'success', message: '' })
           })
+          .catch(err => {
+            errorHandler(err)
+          })
+      })
+      .catch(err => {
+        errorHandler(err)
       })
   },
-  addLike: (req, res, callback) => {
+  addLike: (req, res, callback, errorHandler) => {
     return Like.create({
       UserId: req.user.id,
       RestaurantId: req.params.restaurantId
     }).then((restaurant) => {
       return callback({ status: 'success', message: '' })
+    }).catch(err => {
+      errorHandler(err)
     })
   },
 
-  removeLike: (req, res, callback) => {
+  removeLike: (req, res, callback, errorHandler) => {
     return Like.findOne({
       where: {
         UserId: req.user.id,
@@ -104,9 +130,14 @@ const userService = {
         .then((restaurant) => {
           return callback({ status: 'success', message: '' })
         })
+        .catch(err => {
+          errorHandler(err)
+        })
+    }).catch(err => {
+      errorHandler(err)
     })
   },
-  getTopUser: (req, res, callback) => {
+  getTopUser: (req, res, callback, errorHandler) => {
     return User.findAll({
       include: [
         { model: User, as: 'Followers' }
@@ -119,9 +150,11 @@ const userService = {
       }))
       users = users.sort((a, b) => b.FollowerCount - a.FollowerCount)
       callback({ users: users })
+    }).catch(err => {
+      errorHandler(err)
     })
   },
-  addFollowing: (req, res, callback) => {
+  addFollowing: (req, res, callback, errorHandler) => {
     return Followship.create({
       followerId: req.user.id,
       followingId: req.params.userId
@@ -129,9 +162,12 @@ const userService = {
       .then((followship) => {
         return callback({ status: 'success', message: '' })
       })
+      .catch(err => {
+        errorHandler(err)
+      })
   },
 
-  removeFollowing: (req, res, callback) => {
+  removeFollowing: (req, res, callback, errorHandler) => {
     return Followship.findOne({
       where: {
         followerId: req.user.id,
@@ -143,6 +179,12 @@ const userService = {
           .then((followship) => {
             return callback({ status: 'success', message: '' })
           })
+          .catch(err => {
+            errorHandler(err)
+          })
+      })
+      .catch(err => {
+        errorHandler(err)
       })
   }
 }

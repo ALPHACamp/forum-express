@@ -2,7 +2,7 @@ const db = require('../models')
 const Comment = db.Comment
 
 let commentService = {
-  postComment: (req, res, callback) => {
+  postComment: (req, res, callback, errorHandler) => {
     return Comment.create({
       text: req.body.text,
       RestaurantId: req.body.restaurantId,
@@ -17,8 +17,11 @@ let commentService = {
           commentId: comment.id
         })
       })
+      .catch(err => {
+        errorHandler(err)
+      })
   },
-  deleteComment: (req, res, callback) => {
+  deleteComment: (req, res, callback, errorHandler) => {
     return Comment.findByPk(req.params.id)
       .then((comment) => {
         const restaurantId = comment.RestaurantId
@@ -26,6 +29,12 @@ let commentService = {
           .then((comment) => {
             return callback({ status: 'success', message: 'comment is removed ', RestaurantId: restaurantId })
           })
+          .catch(err => {
+            errorHandler(err)
+          })
+      })
+      .catch(err => {
+        errorHandler(err)
       })
   }
 }

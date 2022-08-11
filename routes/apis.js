@@ -5,6 +5,8 @@ const passport = require('../config/passport')
 const multer = require('multer')
 const upload = multer({ dest: 'temp/' })
 
+const { generalErrorHandler } = require('../middlewares/error-handler')
+
 const restController = require('../controllers/api/restController.js')
 const userController = require('../controllers/api/userController.js')
 const adminController = require('../controllers/api/adminController.js')
@@ -62,5 +64,7 @@ router.delete('/admin/categories/:id', authenticated, authenticatedAdmin, catego
 // JWT signin
 router.post('/signin', userController.signIn)
 router.post('/signup', userController.signUp)
+
+router.use('/', generalErrorHandler)
 
 module.exports = router
