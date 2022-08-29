@@ -52,11 +52,12 @@ jwtOptions.secretOrKey = process.env.JWT_SECRET
 
 let strategy = new JwtStrategy(jwtOptions, function (jwt_payload, next) {
   User.findByPk(jwt_payload.id, {
+    attributes: ['id', 'name', 'isAdmin', 'image', 'email'],
     include: [
-      { model: db.Restaurant, as: 'FavoritedRestaurants' },
-      { model: db.Restaurant, as: 'LikedRestaurants' },
-      { model: User, as: 'Followers' },
-      { model: User, as: 'Followings' }
+      { model: db.Restaurant, as: 'FavoritedRestaurants', attributes: ['id'] },
+      { model: db.Restaurant, as: 'LikedRestaurants', attributes: ['id'] },
+      { model: User, as: 'Followers', attributes: ['id'] },
+      { model: User, as: 'Followings', attributes: ['id'] }
     ]
   }).then(user => {
     if (!user) return next(null, false)

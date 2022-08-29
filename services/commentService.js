@@ -1,41 +1,27 @@
 const db = require('../models')
 const Comment = db.Comment
+const Restaurant = db.Restaurant
+const User = db.User
 
-let commentService = {
-  postComment: (req, res, callback, errorHandler) => {
-    return Comment.create({
-      text: req.body.text,
-      RestaurantId: req.body.restaurantId,
-      UserId: req.user.id
-    })
-      .then((comment) => {
-        console.log('comment', comment)
-        return callback({
-          status: 'success',
-          message: 'created new comment successfully',
-          RestaurantId: comment.RestaurantId,
-          commentId: comment.id
-        })
-      })
-      .catch(err => {
-        errorHandler(err)
-      })
+const commentService = {
+  createComment: async (comment) => {
+    return await Comment.create(comment)
   },
-  deleteComment: (req, res, callback, errorHandler) => {
-    return Comment.findByPk(req.params.id)
-      .then((comment) => {
-        const restaurantId = comment.RestaurantId
-        comment.destroy()
-          .then((comment) => {
-            return callback({ status: 'success', message: 'comment is removed ', RestaurantId: restaurantId })
-          })
-          .catch(err => {
-            errorHandler(err)
-          })
-      })
-      .catch(err => {
-        errorHandler(err)
-      })
+
+  deleteComment: async (id) => {
+    await Comment.destroy({ where: { id }})
+  },
+
+  getFeeds: async (limit) => {
+    return await Comment.findAll({
+      attributes: ['id', 'text', 'createdAt'],
+      limit,
+      order: [['createdAt', 'DESC']],
+      include: [
+        { model: User, attributes: ['id', 'name'] },
+        { model: Restaurant, attributes: ['id', 'name', 'image'] }
+      ]
+    })
   }
 }
 
