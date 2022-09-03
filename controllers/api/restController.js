@@ -9,17 +9,17 @@ const paginationHelper = require('../../helpers/paginationHelper')
 const restController = {
   getRestaurants: async (req, res, next) => {
     /*  #swagger.tags = ['Restaurant']
-    #swagger.summary = 'Get resturants' */
+    #swagger.summary = '取得所有餐廳' */
 
     /*  #swagger.parameters['page'] = {
           in: 'query',
           type: 'integer',
-          description: 'Page'
+          description: '取得頁數'
     } */
     /*  #swagger.parameters['categoryId'] = {
           in: 'query',
           type: 'integer',
-          description: 'Filter by categoryId'
+          description: '類別ID'
     } */
 
     /*  #swagger.security = [{
@@ -67,7 +67,7 @@ const restController = {
 
   getFeeds: async (req, res, next) => {
     /*  #swagger.tags = ['Restaurant']
-    #swagger.summary = 'Get restaurant feeds' */
+    #swagger.summary = '取得餐廳資訊' */
 
     /*  #swagger.security = [{
           bearerAuth: []
@@ -89,7 +89,7 @@ const restController = {
 
   getTopRestaurants: async (req, res, next) => {
     /*  #swagger.tags = ['Restaurant']
-        #swagger.summary = 'Get top restaurants' */
+        #swagger.summary = '取得熱門收藏餐廳' */
 
     /*  #swagger.security = [{
           bearerAuth: []
@@ -110,14 +110,14 @@ const restController = {
   
   getRestaurant: async (req, res, next) => {
     /*  #swagger.tags = ['Restaurant']
-        #swagger.summary = 'Get restaurant by restaurant ID' */
+        #swagger.summary = '取得餐廳' */
 
     /*  #swagger.parameters['id'] = {
           in: 'path',
           schema: {
             type: 'integer'
           },
-          description: 'Restaurant ID',
+          description: '餐廳ID',
           required: true
     } */
 

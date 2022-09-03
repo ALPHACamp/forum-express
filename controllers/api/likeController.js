@@ -5,11 +5,11 @@ const { SuccessResponse } = require('../../data/response')
 const likeController = {
   postLike: async (req, res, next) => {
 		/*  #swagger.tags = ['Like']
-				#swagger.summary = 'Add liked restaurant to user'  */
+				#swagger.summary = '新增喜歡餐廳'  */
 	
 		/*  #swagger.parameters['restaurantId'] = {
 					in: 'path',
-					description: 'Restaurant ID',
+					description: '餐廳ID',
           schema: {
             type: 'integer'
           },
@@ -30,11 +30,11 @@ const likeController = {
 
 	deleteLike: async (req, res, next) => {
 		/*  #swagger.tags = ['Like']
-				#swagger.summary = 'Remove liked restaurant from user'  */
+				#swagger.summary = '移除喜歡餐廳'  */
 	
 		/*  #swagger.parameters['restaurantId'] = {
 					in: 'path',
-					description: 'Restaurant ID',
+					description: '餐廳ID',
           schema: {
             type: 'integer'
           },

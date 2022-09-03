@@ -9,7 +9,7 @@ const userService = require('../../services/userService')
 const userController = {
   signIn: async (req, res, next) => {
     /*  #swagger.tags = ['User']
-        #swagger.summary = 'Sign in a specific user'  */
+        #swagger.summary = '登入'  */
 
     /*  #swagger.requestBody = {
           required: true,
@@ -20,11 +20,13 @@ const userController = {
                 properties: {
                   email: {
                     type: 'string',
-                    example: 'example@example.com'
+                    example: 'example@example.com',
+                    description: 'email'
                   },
                   password: {
                     type: 'string',
-                    example: 'password'
+                    example: 'password',
+                    description: '密碼'
                   }
                 },
                 required: ['email', 'password']
@@ -65,7 +67,7 @@ const userController = {
 
   signUp: async (req, res, next) => {
     /*  #swagger.tags = ['User']
-        #swagger.summary = 'Sign up an account' */
+        #swagger.summary = '註冊' */
 
     /*  #swagger.requestBody = {
           required: true,
@@ -76,19 +78,23 @@ const userController = {
                 properties: {
                   name: {
                     type: 'string',
-                    example: 'tester'
+                    example: 'tester',
+                    description: '名稱'
                   },
                   email: {
                     type: 'string',
-                    example: 'example@example.com'
+                    example: 'example@example.com',
+                    description: 'email'
                   },
                   password: {
                     type: 'string',
-                    example: 'password'
+                    example: 'password',
+                    description: '密碼'
                   },
                   passwordCheck: {
                     type: 'string',
-                    example: 'password'
+                    example: 'password',
+                    description: '確認密碼'
                   }
                 },
                 required: ['email', 'password', 'passwordCheck']
@@ -118,14 +124,14 @@ const userController = {
 
   getUser: async (req, res, next) => {
     /*  #swagger.tags = ['User']
-        #swagger.summary = 'Get user by user ID' */
+        #swagger.summary = '取得使用者' */
 
     /*  #swagger.parameters['id'] = {
           in: 'path',
           schema: {
             type: 'integer'
           },
-          description: 'User ID',
+          description: '使用者ID',
           required: true
     } */
 
@@ -144,14 +150,14 @@ const userController = {
 
   putUser: async (req, res, next) => {
     /*  #swagger.tags = ['User']
-        #swagger.summary = 'Update user'  */
+        #swagger.summary = '更新使用者'  */
 
     /*  #swagger.parameters['id'] = {
           in: 'path',
           schema: {
             type: 'integer'
           },
-          description: 'User ID',
+          description: '使用者ID',
           required: true
     } */
     
@@ -164,11 +170,13 @@ const userController = {
                 properties: {
                   name: {
                     type: 'string',
-                    example: 'tester'
+                    example: 'tester',
+                    description: '名稱'
                   },
                   image: {
                     type: 'string',
-                    format: 'binary'
+                    format: 'binary',
+                    description: '頭像'
                   }
                 },
                 required: ['name']
@@ -202,7 +210,7 @@ const userController = {
 
   getTopUser: async (req, res, next) => {
     /*  #swagger.tags = ['User']
-        #swagger.summary = 'Get users sort by follower count' */
+        #swagger.summary = '取得熱門追蹤使用者' */
 
     /*  #swagger.security = [{
           bearerAuth: []
@@ -223,7 +231,7 @@ const userController = {
 
   getCurrentUser: (req, res) => {
     /*  #swagger.tags = ['User']
-        #swagger.summary = 'Get current login user' */
+        #swagger.summary = '取得目前登入使用者' */
 
     /*  #swagger.security = [{
           bearerAuth: []

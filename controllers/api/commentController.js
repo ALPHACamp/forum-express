@@ -5,7 +5,7 @@ const { SuccessResponse } = require('../../data/response')
 const commentController = {
   postComment: async (req, res, next) => {
     /*  #swagger.tags = ['Comment']
-        #swagger.summary = 'Leave comment' */
+        #swagger.summary = '新增評論' */
 
     /*  #swagger.requestBody = {
           required: true,
@@ -16,14 +16,16 @@ const commentController = {
                 properties: {
                   text: {
                     type: 'string',
-                    example: 'new comment'
+                    example: 'new comment',
+                    description: '內容'
                   },
                   RestaurantId: {
                     type: 'integer',
-                    example: 1
+                    example: 1,
+                    description: '餐廳ID'
                   }
                 },
-                required: ['email', 'password', 'passwordCheck']
+                required: ['text', 'RestaurantId']
               }
             }
           }
@@ -47,14 +49,14 @@ const commentController = {
 
   deleteComment: async (req, res, next) => {
     /*  #swagger.tags = ['Comment']
-        #swagger.summary = 'Remove comment' */
+        #swagger.summary = '刪除評論' */
 
     /*  #swagger.parameters['id'] = {
           in: 'path',
           schema: {
             type: 'integer'
           },
-          description: 'Comment ID',
+          description: '評論ID',
           required: true
     } */
 

@@ -9,7 +9,7 @@ const userService = require('../../services/userService')
 const adminController = {
   getRestaurants: async (req, res, next) => {
     /*  #swagger.tags = ['Admin']
-        #swagger.summary = 'Get all resturants' */
+        #swagger.summary = '取得所有餐廳' */
 
     /*  #swagger.security = [{
           bearerAuth: []
@@ -25,14 +25,14 @@ const adminController = {
 
   getRestaurant: async (req, res, next) => {
     /*  #swagger.tags = ['Admin']
-        #swagger.summary = 'Get resturant by restaurant ID' */
+        #swagger.summary = '取得餐廳' */
 
     /*  #swagger.parameters['id'] = {
           in: 'path',
           schema: {
             type: 'integer'
           },
-          description: 'Restaurant ID',
+          description: '餐廳ID',
           required: true
     } */
 
@@ -50,7 +50,7 @@ const adminController = {
   
   postRestaurant: async (req, res, next) => {
     /*  #swagger.tags = ['Admin']
-        #swagger.summary = 'Add a new restaurant' */
+        #swagger.summary = '新增餐廳' */
 
     /*  #swagger.requestBody = {
           required: true,
@@ -61,30 +61,37 @@ const adminController = {
                 properties: {
                   name: {
                     type: 'string',
-                    example: 'new restaurant'
+                    example: 'Yum Yum restaurant',
+                    description: '名稱'
                   },
                   categoryId: {
-                    type: 'integer'
+                    type: 'integer',
+                    description: '類別ID'
                   },
                   tel: {
                     type: 'string',
-                    example: '01-0000-0000'
+                    example: '01-0000-0000',
+                    description: '電話'
                   },
                   address: {
                     type: 'string',
-                    example: '930 Address Dist.'
+                    example: '930 Address Dist.',
+                    description: '地址'
                   },
                   opening_hours: {
                     type: 'string',
-                    example: '08:00 - 09:00'
+                    example: '08:00 - 09:00',
+                    description: '營業時間'
                   },
                   description: {
                     type: 'string',
-                    example: 'restaurant description'
+                    example: 'restaurant description',
+                    description: '敘述'
                   },
                   image: {
                     type: 'string',
-                    format: 'binary'
+                    format: 'binary',
+                    description: '圖片'
                   }
                 },
                 required: ['name', 'categoryId']
@@ -120,14 +127,14 @@ const adminController = {
 
   putRestaurant: async (req, res, next) => {
     /*  #swagger.tags = ['Admin']
-        #swagger.summary = 'Update a specific restaurant' */
+        #swagger.summary = '更新餐廳' */
 
     /*  #swagger.parameters['id'] = {
           in: 'path',
           schema: {
             type: 'integer'
           },
-          description: 'Restaurant ID',
+          description: '餐廳ID',
           required: true
     } */
 
@@ -140,30 +147,37 @@ const adminController = {
                 properties: {
                   name: {
                     type: 'string',
-                    example: 'new restaurant'
+                    example: 'Yum Yum restaurant',
+                    description: '名稱'
                   },
                   categoryId: {
-                    type: 'integer'
+                    type: 'integer',
+                    description: '類別ID'
                   },
                   tel: {
                     type: 'string',
-                    example: '01-0000-0000'
+                    example: '01-0000-0000',
+                    description: '電話'
                   },
                   address: {
                     type: 'string',
-                    example: '930 Address Dist.'
+                    example: '930 Address Dist.',
+                    description: '地址'
                   },
                   opening_hours: {
                     type: 'string',
-                    example: '08:00 - 09:00'
+                    example: '08:00 - 09:00',
+                    description: '營業時間'
                   },
                   description: {
                     type: 'string',
-                    example: 'restaurant description'
+                    example: 'restaurant description',
+                    description: '敘述'
                   },
                   image: {
                     type: 'string',
-                    format: 'binary'
+                    format: 'binary',
+                    description: '圖片'
                   }
                 },
                 required: ['name', 'categoryId']
@@ -199,14 +213,14 @@ const adminController = {
 
   deleteRestaurant: async (req, res, next) => {
     /*  #swagger.tags = ['Admin']
-        #swagger.summary = 'Delete a specific restaurant' */
+        #swagger.summary = '刪除餐廳' */
 
     /*  #swagger.parameters['id'] = {
           in: 'path',
           schema: {
             type: 'integer'
           },
-          description: 'Restaurant ID',
+          description: '餐廳ID',
           required: true
     } */
 
@@ -224,7 +238,7 @@ const adminController = {
 
   getUsers: async (req, res, next) => {
     /*  #swagger.tags = ['Admin']
-        #swagger.summary = 'Get all users' */
+        #swagger.summary = '取得所有使用者' */
 
     /*  #swagger.security = [{
           bearerAuth: []
@@ -240,14 +254,14 @@ const adminController = {
   
   putUser: async (req, res, next) => {
     /*  #swagger.tags = ['Admin']
-        #swagger.summary = 'Update user role' */
+        #swagger.summary = '更新使用者角色' */
 
     /*  #swagger.parameters['id'] = {
           in: 'path',
           schema: {
             type: 'integer'
           },
-          description: 'User ID',
+          description: '使用者ID',
           required: true
     } */
 
@@ -260,7 +274,8 @@ const adminController = {
                 properties: {
                   isAdmin: {
                     type: 'string',
-                    example: 'true'
+                    example: 'true',
+                    description: '是否為管理者'
                   }
                 },
                 required: ['isAdmin']
@@ -285,7 +300,7 @@ const adminController = {
 
   getCategories: async (req, res, next) => {
     /*  #swagger.tags = ['Admin']
-        #swagger.summary = 'Get all categories' */
+        #swagger.summary = '取得所有類別' */
 
     /*  #swagger.security = [{
           bearerAuth: []
@@ -301,7 +316,7 @@ const adminController = {
 
   postCategory: async (req, res, next) => {
     /*  #swagger.tags = ['Admin']
-        #swagger.summary = 'Add a new category' */
+        #swagger.summary = '新增類別' */
 
     /*  #swagger.requestBody = {
           required: true,
@@ -312,7 +327,8 @@ const adminController = {
                 properties: {
                   name: {
                     type: 'string',
-                    example: 'Grocery'
+                    example: 'Grocery',
+                    description: '名稱'
                   }
                 },
                 required: ['name']
@@ -340,14 +356,14 @@ const adminController = {
 
   putCategory: async (req, res, next) => {
     /*  #swagger.tags = ['Admin']
-        #swagger.summary = 'Update a specific category' */
+        #swagger.summary = '更新類別' */
 
     /*  #swagger.parameters['id'] = {
           in: 'path',
           schema: {
             type: 'integer'
           },
-          description: 'Category ID',
+          description: '類別ID',
           required: true
     } */
 
@@ -360,7 +376,8 @@ const adminController = {
                 properties: {
                   name: {
                     type: 'string',
-                    example: 'Grocery'
+                    example: 'Grocery',
+                    description: '名稱'
                   }
                 },
                 required: ['name']
@@ -388,14 +405,14 @@ const adminController = {
 
   deleteCategory: async (req, res, next) => {
     /*  #swagger.tags = ['Admin']
-        #swagger.summary = 'Delete a specific category' */
+        #swagger.summary = '刪除類別' */
 
     /*  #swagger.parameters['id'] = {
           in: 'path',
           schema: {
             type: 'integer'
           },
-          description: 'Category ID',
+          description: '類別ID',
           required: true
     } */
 

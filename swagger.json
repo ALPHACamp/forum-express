@@ -57,7 +57,7 @@
         "tags": [
           "User"
         ],
-        "summary": "Get current login user",
+        "summary": "取得目前登入使用者",
         "description": "",
         "parameters": [],
         "responses": {
@@ -84,13 +84,13 @@
         "tags": [
           "Restaurant"
         ],
-        "summary": "Get resturants",
+        "summary": "取得所有餐廳",
         "description": "",
         "parameters": [
           {
             "name": "page",
             "in": "query",
-            "description": "Page",
+            "description": "取得頁數",
             "schema": {
               "type": "integer"
             }
@@ -98,7 +98,7 @@
           {
             "name": "categoryId",
             "in": "query",
-            "description": "Filter by categoryId",
+            "description": "類別ID",
             "schema": {
               "type": "integer"
             }
@@ -121,7 +121,7 @@
         "tags": [
           "Restaurant"
         ],
-        "summary": "Get restaurant feeds",
+        "summary": "取得餐廳資訊",
         "description": "",
         "parameters": [],
         "responses": {
@@ -141,7 +141,7 @@
         "tags": [
           "Restaurant"
         ],
-        "summary": "Get top restaurants",
+        "summary": "取得熱門收藏餐廳",
         "description": "",
         "parameters": [],
         "responses": {
@@ -161,7 +161,7 @@
         "tags": [
           "Restaurant"
         ],
-        "summary": "Get restaurant by restaurant ID",
+        "summary": "取得餐廳",
         "description": "",
         "parameters": [
           {
@@ -171,7 +171,7 @@
             "schema": {
               "type": "integer"
             },
-            "description": "Restaurant ID"
+            "description": "餐廳ID"
           }
         ],
         "responses": {
@@ -191,7 +191,7 @@
         "tags": [
           "User"
         ],
-        "summary": "Get users sort by follower count",
+        "summary": "取得熱門追蹤使用者",
         "description": "",
         "parameters": [],
         "responses": {
@@ -211,7 +211,7 @@
         "tags": [
           "User"
         ],
-        "summary": "Get user by user ID",
+        "summary": "取得使用者",
         "description": "",
         "parameters": [
           {
@@ -221,7 +221,7 @@
             "schema": {
               "type": "integer"
             },
-            "description": "User ID"
+            "description": "使用者ID"
           }
         ],
         "responses": {
@@ -239,7 +239,7 @@
         "tags": [
           "User"
         ],
-        "summary": "Update user",
+        "summary": "更新使用者",
         "description": "",
         "parameters": [
           {
@@ -249,7 +249,7 @@
             "schema": {
               "type": "integer"
             },
-            "description": "User ID"
+            "description": "使用者ID"
           }
         ],
         "responses": {
@@ -271,11 +271,13 @@
                 "properties": {
                   "name": {
                     "type": "string",
-                    "example": "tester"
+                    "example": "tester",
+                    "description": "名稱"
                   },
                   "image": {
                     "type": "string",
-                    "format": "binary"
+                    "format": "binary",
+                    "description": "頭像"
                   }
                 },
                 "required": [
@@ -292,7 +294,7 @@
         "tags": [
           "Favorite"
         ],
-        "summary": "Add favorite restaurant to user",
+        "summary": "加入收藏餐廳",
         "description": "",
         "parameters": [
           {
@@ -302,7 +304,7 @@
             "schema": {
               "type": "integer"
             },
-            "description": "Restaurant ID"
+            "description": "餐廳ID"
           }
         ],
         "responses": {
@@ -320,7 +322,7 @@
         "tags": [
           "Favorite"
         ],
-        "summary": "Remove favorite restaurant from user",
+        "summary": "移除收藏餐廳",
         "description": "",
         "parameters": [
           {
@@ -330,7 +332,7 @@
             "schema": {
               "type": "integer"
             },
-            "description": "Restaurant ID"
+            "description": "餐廳ID"
           }
         ],
         "responses": {
@@ -350,7 +352,7 @@
         "tags": [
           "Like"
         ],
-        "summary": "Add liked restaurant to user",
+        "summary": "新增喜歡餐廳",
         "description": "",
         "parameters": [
           {
@@ -360,7 +362,7 @@
             "schema": {
               "type": "integer"
             },
-            "description": "Restaurant ID"
+            "description": "餐廳ID"
           }
         ],
         "responses": {
@@ -378,7 +380,7 @@
         "tags": [
           "Like"
         ],
-        "summary": "Remove liked restaurant from user",
+        "summary": "移除喜歡餐廳",
         "description": "",
         "parameters": [
           {
@@ -388,7 +390,7 @@
             "schema": {
               "type": "integer"
             },
-            "description": "Restaurant ID"
+            "description": "餐廳ID"
           }
         ],
         "responses": {
@@ -408,7 +410,7 @@
         "tags": [
           "Comment"
         ],
-        "summary": "Leave comment",
+        "summary": "新增評論",
         "description": "",
         "parameters": [],
         "responses": {
@@ -430,17 +432,18 @@
                 "properties": {
                   "text": {
                     "type": "string",
-                    "example": "new comment"
+                    "example": "new comment",
+                    "description": "內容"
                   },
                   "RestaurantId": {
                     "type": "integer",
-                    "example": 1
+                    "example": 1,
+                    "description": "餐廳ID"
                   }
                 },
                 "required": [
-                  "email",
-                  "password",
-                  "passwordCheck"
+                  "text",
+                  "RestaurantId"
                 ]
               }
             }
@@ -453,7 +456,7 @@
         "tags": [
           "Comment"
         ],
-        "summary": "Remove comment",
+        "summary": "刪除評論",
         "description": "",
         "parameters": [
           {
@@ -463,7 +466,7 @@
             "schema": {
               "type": "integer"
             },
-            "description": "Comment ID"
+            "description": "評論ID"
           }
         ],
         "responses": {
@@ -483,7 +486,7 @@
         "tags": [
           "Followship"
         ],
-        "summary": "Following user",
+        "summary": "追隨使用者",
         "description": "",
         "parameters": [
           {
@@ -493,7 +496,7 @@
             "schema": {
               "type": "integer"
             },
-            "description": "Following user ID"
+            "description": "欲追隨使用者ID"
           }
         ],
         "responses": {
@@ -511,7 +514,7 @@
         "tags": [
           "Followship"
         ],
-        "summary": "Unfollowing user",
+        "summary": "取消追隨使用者",
         "description": "",
         "parameters": [
           {
@@ -521,7 +524,7 @@
             "schema": {
               "type": "integer"
             },
-            "description": "Following user ID"
+            "description": "欲取消追隨使用者ID"
           }
         ],
         "responses": {
@@ -552,7 +555,7 @@
         "tags": [
           "Admin"
         ],
-        "summary": "Get all resturants",
+        "summary": "取得所有餐廳",
         "description": "",
         "parameters": [],
         "responses": {
@@ -570,7 +573,7 @@
         "tags": [
           "Admin"
         ],
-        "summary": "Add a new restaurant",
+        "summary": "新增餐廳",
         "description": "",
         "parameters": [],
         "responses": {
@@ -592,30 +595,37 @@
                 "properties": {
                   "name": {
                     "type": "string",
-                    "example": "new restaurant"
+                    "example": "Yum Yum restaurant",
+                    "description": "名稱"
                   },
                   "categoryId": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "類別ID"
                   },
                   "tel": {
                     "type": "string",
-                    "example": "01-0000-0000"
+                    "example": "01-0000-0000",
+                    "description": "電話"
                   },
                   "address": {
                     "type": "string",
-                    "example": "930 Address Dist."
+                    "example": "930 Address Dist.",
+                    "description": "地址"
                   },
                   "opening_hours": {
                     "type": "string",
-                    "example": "08:00 - 09:00"
+                    "example": "08:00 - 09:00",
+                    "description": "營業時間"
                   },
                   "description": {
                     "type": "string",
-                    "example": "restaurant description"
+                    "example": "restaurant description",
+                    "description": "敘述"
                   },
                   "image": {
                     "type": "string",
-                    "format": "binary"
+                    "format": "binary",
+                    "description": "圖片"
                   }
                 },
                 "required": [
@@ -633,7 +643,7 @@
         "tags": [
           "Admin"
         ],
-        "summary": "Get resturant by restaurant ID",
+        "summary": "取得餐廳",
         "description": "",
         "parameters": [
           {
@@ -643,7 +653,7 @@
             "schema": {
               "type": "integer"
             },
-            "description": "Restaurant ID"
+            "description": "餐廳ID"
           }
         ],
         "responses": {
@@ -661,7 +671,7 @@
         "tags": [
           "Admin"
         ],
-        "summary": "Update a specific restaurant",
+        "summary": "更新餐廳",
         "description": "",
         "parameters": [
           {
@@ -671,7 +681,7 @@
             "schema": {
               "type": "integer"
             },
-            "description": "Restaurant ID"
+            "description": "餐廳ID"
           }
         ],
         "responses": {
@@ -693,30 +703,37 @@
                 "properties": {
                   "name": {
                     "type": "string",
-                    "example": "new restaurant"
+                    "example": "Yum Yum restaurant",
+                    "description": "名稱"
                   },
                   "categoryId": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "類別ID"
                   },
                   "tel": {
                     "type": "string",
-                    "example": "01-0000-0000"
+                    "example": "01-0000-0000",
+                    "description": "電話"
                   },
                   "address": {
                     "type": "string",
-                    "example": "930 Address Dist."
+                    "example": "930 Address Dist.",
+                    "description": "地址"
                   },
                   "opening_hours": {
                     "type": "string",
-                    "example": "08:00 - 09:00"
+                    "example": "08:00 - 09:00",
+                    "description": "營業時間"
                   },
                   "description": {
                     "type": "string",
-                    "example": "restaurant description"
+                    "example": "restaurant description",
+                    "description": "敘述"
                   },
                   "image": {
                     "type": "string",
-                    "format": "binary"
+                    "format": "binary",
+                    "description": "圖片"
                   }
                 },
                 "required": [
@@ -732,7 +749,7 @@
         "tags": [
           "Admin"
         ],
-        "summary": "Delete a specific restaurant",
+        "summary": "刪除餐廳",
         "description": "",
         "parameters": [
           {
@@ -742,7 +759,7 @@
             "schema": {
               "type": "integer"
             },
-            "description": "Restaurant ID"
+            "description": "餐廳ID"
           }
         ],
         "responses": {
@@ -762,7 +779,7 @@
         "tags": [
           "Admin"
         ],
-        "summary": "Get all users",
+        "summary": "取得所有使用者",
         "description": "",
         "parameters": [],
         "responses": {
@@ -782,7 +799,7 @@
         "tags": [
           "Admin"
         ],
-        "summary": "Update user role",
+        "summary": "更新使用者角色",
         "description": "",
         "parameters": [
           {
@@ -792,7 +809,7 @@
             "schema": {
               "type": "integer"
             },
-            "description": "User ID"
+            "description": "使用者ID"
           }
         ],
         "responses": {
@@ -814,7 +831,8 @@
                 "properties": {
                   "isAdmin": {
                     "type": "string",
-                    "example": "true"
+                    "example": "true",
+                    "description": "是否為管理者"
                   }
                 },
                 "required": [
@@ -831,7 +849,7 @@
         "tags": [
           "Admin"
         ],
-        "summary": "Get all categories",
+        "summary": "取得所有類別",
         "description": "",
         "parameters": [],
         "responses": {
@@ -849,7 +867,7 @@
         "tags": [
           "Admin"
         ],
-        "summary": "Add a new category",
+        "summary": "新增類別",
         "description": "",
         "parameters": [],
         "responses": {
@@ -871,7 +889,8 @@
                 "properties": {
                   "name": {
                     "type": "string",
-                    "example": "Grocery"
+                    "example": "Grocery",
+                    "description": "名稱"
                   }
                 },
                 "required": [
@@ -888,7 +907,7 @@
         "tags": [
           "Admin"
         ],
-        "summary": "Update a specific category",
+        "summary": "更新類別",
         "description": "",
         "parameters": [
           {
@@ -898,7 +917,7 @@
             "schema": {
               "type": "integer"
             },
-            "description": "Category ID"
+            "description": "類別ID"
           }
         ],
         "responses": {
@@ -920,7 +939,8 @@
                 "properties": {
                   "name": {
                     "type": "string",
-                    "example": "Grocery"
+                    "example": "Grocery",
+                    "description": "名稱"
                   }
                 },
                 "required": [
@@ -935,7 +955,7 @@
         "tags": [
           "Admin"
         ],
-        "summary": "Delete a specific category",
+        "summary": "刪除類別",
         "description": "",
         "parameters": [
           {
@@ -945,7 +965,7 @@
             "schema": {
               "type": "integer"
             },
-            "description": "Category ID"
+            "description": "類別ID"
           }
         ],
         "responses": {
@@ -965,7 +985,7 @@
         "tags": [
           "User"
         ],
-        "summary": "Sign in a specific user",
+        "summary": "登入",
         "description": "",
         "parameters": [],
         "responses": {
@@ -985,11 +1005,13 @@
                 "properties": {
                   "email": {
                     "type": "string",
-                    "example": "example@example.com"
+                    "example": "example@example.com",
+                    "description": "email"
                   },
                   "password": {
                     "type": "string",
-                    "example": "password"
+                    "example": "password",
+                    "description": "密碼"
                   }
                 },
                 "required": [
@@ -1007,7 +1029,7 @@
         "tags": [
           "User"
         ],
-        "summary": "Sign up an account",
+        "summary": "註冊",
         "description": "",
         "parameters": [],
         "responses": {
@@ -1024,19 +1046,23 @@
                 "properties": {
                   "name": {
                     "type": "string",
-                    "example": "tester"
+                    "example": "tester",
+                    "description": "名稱"
                   },
                   "email": {
                     "type": "string",
-                    "example": "example@example.com"
+                    "example": "example@example.com",
+                    "description": "email"
                   },
                   "password": {
                     "type": "string",
-                    "example": "password"
+                    "example": "password",
+                    "description": "密碼"
                   },
                   "passwordCheck": {
                     "type": "string",
-                    "example": "password"
+                    "example": "password",
+                    "description": "確認密碼"
                   }
                 },
                 "required": [

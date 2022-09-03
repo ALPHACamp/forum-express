@@ -5,11 +5,11 @@ const { SuccessResponse } = require('../../data/response')
 const favoriteController = {
   postFavorite: async (req, res, next) => {
 		/*  #swagger.tags = ['Favorite']
-				#swagger.summary = 'Add favorite restaurant to user'  */
+				#swagger.summary = '加入收藏餐廳'  */
 	
 		/*  #swagger.parameters['restaurantId'] = {
 					in: 'path',
-					description: 'Restaurant ID',
+					description: '餐廳ID',
           schema: {
             type: 'integer'
           },
@@ -30,11 +30,11 @@ const favoriteController = {
 
 	deleteFavorite: async (req, res, next) => {
 		/*  #swagger.tags = ['Favorite']
-				#swagger.summary = 'Remove favorite restaurant from user'  */
+				#swagger.summary = '移除收藏餐廳'  */
 	
 		/*  #swagger.parameters['restaurantId'] = {
 					in: 'path',
-					description: 'Restaurant ID',
+					description: '餐廳ID',
           schema: {
             type: 'integer'
           },
