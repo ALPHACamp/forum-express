@@ -35,3 +35,27 @@ npm run dev
 * 只有網站管理者可以登入網站後台
 * 網站管理者可以在後台管理餐廳的基本資料
 * 網站管理者可以在後台管理餐廳分類
+
+## Swagger UI
+* 進入 /api-docs 可以查看目前支援的 API endpoints
+* 在 Swagger UI 的 Authorize 中，可以放入登入後的 user token 以調用大部分的 endpoint
+
+## General response
+* 在所有 API endpoints 控制下的回傳範本格式如下
+
+  ```json
+  // 成功回傳
+  {
+  	status: "success",
+  	message: "成功處理訊息",  // 部分 endpoints 回傳
+  	...data
+  }
+  
+  // 錯誤回傳
+  {
+  	status: "error",
+  	message: "錯誤訊息"
+  }
+  ```
+
+  
