@@ -33,4 +33,16 @@ const swaggerDocument = require('./swagger.json')
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
+const swaggerJsonPath = '/swagger.json'
+const redoc = require('redoc-express')
+
+app.get(swaggerJsonPath, (req, res) => {
+  res.sendFile('swagger.json', { root: '.' })
+})
+
+app.get('/docs', redoc({
+  title: 'API Docs',
+  specUrl: swaggerJsonPath
+}))
+
 require('./routes')(app)

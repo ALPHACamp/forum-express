@@ -34,6 +34,24 @@
     }
   ],
   "paths": {
+    "/swagger.json": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/docs": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
     "/api/get_current_user": {
       "get": {
         "tags": [
